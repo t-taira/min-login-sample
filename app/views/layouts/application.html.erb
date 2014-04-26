@@ -2,11 +2,17 @@
 <html>
 <head>
   <title>MinLoginSample</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<% if current_user == nil %>
+  <%= link_to "ログイン", new_session_path %>
+<% else %>
+  <%= link_to "ログアウト", session_path(current_user.id), method: :delete, data: {confirm: 'ログアウトしますか？'} %>
+<% end %>
 
 <%= yield %>
 
